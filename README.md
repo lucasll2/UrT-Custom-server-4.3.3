@@ -1,4 +1,4 @@
-# *Click* [MOD] ioquake3 for Urban Terror #
+# *Click* [MOD] Urban Terror 4.3.3 #
 
 ### 4.3.3-compatibility Test  ###
 
