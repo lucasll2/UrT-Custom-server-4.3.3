@@ -1356,27 +1356,45 @@ SV_UpdateUserinfo_f
 ==================
 */
 void SV_UpdateUserinfo_f( client_t *cl ) {
+    gclient_t *gl;
 	if ( (sv_floodProtect->integer) && (cl->state >= CS_ACTIVE) && (svs.time < cl->nextReliableUserTime) ) {
 		Q_strncpyz( cl->userinfobuffer, Cmd_Argv(1), sizeof(cl->userinfobuffer) );
 		SV_SendServerCommand(cl, "print \"^7Command ^1delayed^7 due to sv_floodprotect.\"");
 		return;
 	}
+        gl = (gclient_t *)SV_GameClientNum(cl - svs.clients);
 	cl->userinfobuffer[0]=0;
 	cl->nextReliableUserTime = svs.time + 5000;
 
 	Q_strncpyz( cl->userinfo, Cmd_Argv(1), sizeof(cl->userinfo) );
 
-	if (sv_forceGear && Q_stricmp(sv_forceGear->string, "")) {
-		Info_SetValueForKey(cl->userinfo, "gear", sv_forceGear->string);
-	}
 
 	SV_UserinfoChanged( cl );
 	// call prog code to allow overrides
 	VM_Call( gvm, GAME_CLIENT_USERINFO_CHANGED, cl - svs.clients );
+        if (sv_colourNames->integer) 
+            Q_strncpyz(gl->pers.netname, cl->colourName, MAX_NETNAME);
 }
 
-/*
-==================
+typedef struct {
+	char	*name;
+	void	(*func)( client_t *cl );
+} ucmd_t;
+
+static ucmd_t ucmds[] = {
+	{"userinfo", SV_UpdateUserinfo_f},
+	{"disconnect", SV_Disconnect_f},
+	{"cp", SV_VerifyPaks_f},
+	{"vdr", SV_ResetPureClient_f},
+	{"download", SV_BeginDownload_f},
+	{"nextdl", SV_NextDownload_f},
+	{"stopdl", SV_StopDownload_f},
+	{"donedl", SV_DoneDownload_f},
+
+	{NULL, NULL}
+};
+
+/*===============
 SV_Maplist_f
 ==================
 */
