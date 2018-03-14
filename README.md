@@ -1,4 +1,4 @@
-# Clearskies' ioquake3 for Urban Terror #
+# *Click* ioquake3 for Urban Terror #
 
 ### 4.3.3-compatibility Test  ###
 
