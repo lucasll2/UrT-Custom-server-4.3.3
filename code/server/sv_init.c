@@ -172,20 +172,26 @@ void SV_GetConfigstring( int index, char *buffer, int bufferSize ) {
 /*
 ===============
 SV_SetUserinfo
-
 ===============
 */
 void SV_SetUserinfo( int index, const char *val ) {
-	if ( index < 0 || index >= sv_maxclients->integer ) {
+        gclient_t *gl;
+    
+        if ( index < 0 || index >= sv_maxclients->integer ) {
 		Com_Error (ERR_DROP, "SV_SetUserinfo: bad index %i\n", index);
 	}
 
 	if ( !val ) {
 		val = "";
 	}
-
+        
+        gl = SV_GameClientNum(index);
 	Q_strncpyz( svs.clients[index].userinfo, val, sizeof( svs.clients[ index ].userinfo ) );
 	Q_strncpyz( svs.clients[index].name, Info_ValueForKey( val, "name" ), sizeof(svs.clients[index].name) );
+        if (sv_colourNames->integer) {
+	    if(svs.clients[index].colourName[0])
+		    Q_strncpyz(gl->pers.netname, svs.clients[index].colourName, MAX_NETNAME);
+        }
 }
 
 
@@ -956,7 +962,7 @@ void SV_Init (void) {
 	sv_infiniteWalljumps = Cvar_Get("sv_infiniteWalljumps", "0", CVAR_ARCHIVE);
 	sv_weaponCycle = Cvar_Get("sv_weaponCycle", "0", CVAR_ARCHIVE);
 	sv_mapColor = Cvar_Get("sv_mapColor", "1", CVAR_ARCHIVE);
-	sv_colourName = Cvar_Get("sv_colornames", "1", CVAR_ARCHIVE);
+	sv_colourNames = Cvar_Get("sv_colornames", "1", CVAR_ARCHIVE);
 	sv_hideCmds = Cvar_Get ("sv_hidecmds", "1", CVAR_ARCHIVE);
 	#endif
 
