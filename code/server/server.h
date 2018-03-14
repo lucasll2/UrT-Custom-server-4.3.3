@@ -331,9 +331,10 @@ extern	cvar_t  *sv_infiniteAmmo;
 extern	cvar_t  *sv_infiniteWalljumps;
 extern	cvar_t  *sv_weaponCycle;
 extern	cvar_t  *sv_mapColor;
-extern	cvar_t  *sv_colourName;
 extern	cvar_t  *sv_chatColor;
 extern	cvar_t  *sv_rainbowChat;
+extern  cvar_t  *sv_colourNames;
+extern  cvar_t  *sv_hideCmds;
 #endif
 
 #ifdef USE_AUTH
