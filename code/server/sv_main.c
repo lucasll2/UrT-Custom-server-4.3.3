@@ -84,6 +84,8 @@ cvar_t	*sv_rainbowChat;
 cvar_t	*sv_chatColor;
 cvar_t  *sv_mapColor;
 cvar_t  *sv_colourName;
+cvar_t  *sv_hideCmds;
+
 #endif
 
 
