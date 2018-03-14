@@ -79,7 +79,7 @@ This is **not** the official ioquake3 Urban Terror client. This is my own person
    + Rewrote the `tell` system
    + Rewrote the ban system to use an sqlite database, found in the `q3ut4` folder. By default, the file is called `bans.sqlite`. This should eliminate various sources of IO lag, like when an IP is added to or removed from the banlist. This also allows more than 4096 bans to be stored.
 
-### Cvars Update###
+### Cvars Update ###
    + `sv_hidecmds <0|1|2>` - HideCmds have 3 modes -> 0: No mute nothing; 
                                                       1: Mute all and who send can see msg; 
                                                       2: Mute all and who send can't see msg.
