@@ -948,14 +948,14 @@ void SV_Init (void) {
 	sv_botRace = Cvar_Get("sv_botRace", "2", CVAR_ARCHIVE);
 
 	#ifdef USE_SERVER_EXTRAS
-	sv_chatColor = Cvar_Get("sv_chatColor", "5", CVAR_ARCHIVE);
+	sv_chatColor = Cvar_Get("sv_chatColor", "7", CVAR_ARCHIVE);
 	sv_rainbowChat = Cvar_Get("sv_rainbowChat", "0", CVAR_ARCHIVE);
 	sv_infiniteStamina = Cvar_Get("sv_infiniteStamina", "0", CVAR_ARCHIVE);
 	sv_noRecoil = Cvar_Get("sv_noRecoil", "1", CVAR_ARCHIVE);
 	sv_infiniteAmmo = Cvar_Get("sv_infiniteAmmo", "1", CVAR_ARCHIVE);
 	sv_infiniteWalljumps = Cvar_Get("sv_infiniteWalljumps", "0", CVAR_ARCHIVE);
 	sv_weaponCycle = Cvar_Get("sv_weaponCycle", "0", CVAR_ARCHIVE);
-	sv_mapColor = Cvar_Get("sv_mapColor", "7", CVAR_ARCHIVE);
+	sv_mapColor = Cvar_Get("sv_mapColor", "1", CVAR_ARCHIVE);
 	sv_colourName = Cvar_Get("sv_colornames", "1", CVAR_ARCHIVE);
 	sv_hideCmds = Cvar_Get ("sv_hidecmds", "1", CVAR_ARCHIVE);
 	#endif
