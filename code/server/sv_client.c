@@ -1583,6 +1583,24 @@ void SV_ExecuteClientCommand( client_t *cl, const char *s, qboolean clientOK ) {
 			argsFromOneMaxlen = -1;
 			if (Q_stricmp("say", Cmd_Argv(0)) == 0 || Q_stricmp("say_team", Cmd_Argv(0)) == 0) {
 				argsFromOneMaxlen = MAX_SAY_STRLEN;
+				
+			 
+					p = Cmd_Argv(1);
+				while (*p == ' ') p++;
+				if (strncmp("!pm", (char *)p, 3) == 0)
+				{
+					SV_SendServerCommand(cl, "chat \"^9[pm] ^7%s: ^3%s\"", cl->colourName, Cmd_Args());
+							   SV_LogPrintf("say: %i %s: %s\n", ps->clientNum, cl->name, CopyString(Cmd_Args()));
+							   return;
+				}
+				if (((*p == '!') || (*p == '@') || (*p == '&') || (*p == '/')) && sv_hideCmds->integer)
+				{
+							   if(sv_hideCmds->integer == 1)
+								   SV_SendServerCommand(cl, "chat \"^9[pm] ^7%s: ^3%s\"", cl->colourName, Cmd_Args());
+							   SV_LogPrintf("say: %i %s: %s\n", ps->clientNum, cl->name, CopyString(Cmd_Args()));
+							   return;
+				}
+
 			} else if (Q_stricmp("tell", Cmd_Argv(0)) == 0) {
 				// A command will look like "tell 12 hi" or "tell foo hi".  The "12"
 				// and "foo" in the examples will be counted towards MAX_SAY_STRLEN,
